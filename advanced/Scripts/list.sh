@@ -10,8 +10,8 @@
 # This file is copyright under the latest version of the EUPL.
 # Please see LICENSE file for your rights under this license.
 
-readonly PI_HOLE_DATA_DIR="/etc/pihole"
-readonly PI_HOLE_SCRIPT_DIR="/opt/pihole"
+readonly PI_HOLE_DATA_DIR="/var/lib/pihole"
+readonly PI_HOLE_SCRIPT_DIR="/usr/share/pihole"
 readonly utilsfile="${PI_HOLE_SCRIPT_DIR}/utils.sh"
 source "${utilsfile}"
 

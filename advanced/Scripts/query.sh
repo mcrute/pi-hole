@@ -15,7 +15,7 @@
 # Please see LICENSE file for your rights under this license.
 
 # Globals
-PI_HOLE_INSTALL_DIR="/opt/pihole"
+PI_HOLE_INSTALL_DIR="/usr/share/pihole"
 max_results="20"
 partial="false"
 domain=""

@@ -9,12 +9,13 @@
 # This file is copyright under the latest version of the EUPL.
 # Please see LICENSE file for your rights under this license.
 
-readonly PI_HOLE_SCRIPT_DIR="/opt/pihole"
+readonly LINUX_DISTRO_PACKAGE="Alpine"
+readonly PI_HOLE_SCRIPT_DIR="/usr/share/pihole"
 
 # PI_HOLE_BIN_DIR is not readonly here because in some functions (checkout),
 # they might get set again when the installer is sourced. This causes an
 # error due to modifying a readonly variable.
-PI_HOLE_BIN_DIR="/usr/local/bin"
+PI_HOLE_BIN_DIR="/usr/bin"
 
 readonly colfile="${PI_HOLE_SCRIPT_DIR}/COL_TABLE"
 source "${colfile}"

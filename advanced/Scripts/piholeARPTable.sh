@@ -10,8 +10,8 @@
 # This file is copyright under the latest version of the EUPL.
 # Please see LICENSE file for your rights under this license.
 
-readonly PI_HOLE_SCRIPT_DIR="/opt/pihole"
-readonly PI_HOLE_DATA_DIR="/etc/pihole"
+readonly PI_HOLE_SCRIPT_DIR="/usr/share/pihole"
+readonly PI_HOLE_DATA_DIR="/var/lib/pihole"
 
 coltable="${PI_HOLE_SCRIPT_DIR}/COL_TABLE"
 if [[ -f ${coltable} ]]; then

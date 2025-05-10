@@ -13,8 +13,8 @@
 
 export LC_ALL=C
 
-PI_HOLE_SCRIPT_DIR="/opt/pihole"
-PI_HOLE_MIGRATIONS_DIR="/etc/.pihole/advanced/Scripts/database_migration"
+PI_HOLE_SCRIPT_DIR="/usr/share/pihole"
+PI_HOLE_MIGRATIONS_DIR="${PI_HOLE_SCRIPT_DIR}/database_migration"
 # Source utils.sh for GetFTLConfigValue
 utilsfile="${PI_HOLE_SCRIPT_DIR}/utils.sh"
 # shellcheck disable=SC1090
@@ -27,9 +27,9 @@ coltable="${PI_HOLE_SCRIPT_DIR}/COL_TABLE"
 . "${PI_HOLE_MIGRATIONS_DIR}/gravity-db.sh"
 
 basename="pihole"
-PIHOLE_COMMAND="/usr/local/bin/${basename}"
+PIHOLE_COMMAND="/usr/bin/${basename}"
 
-piholeDir="/etc/${basename}"
+piholeDir="/var/lib/pihole"
 
 # Gravity aux files directory
 listsCacheDir="${piholeDir}/listsCache"
@@ -40,8 +40,8 @@ blacklistFile="${piholeDir}/blacklist.txt"
 regexFile="${piholeDir}/regex.list"
 adListFile="${piholeDir}/adlists.list"
 
-piholeGitDir="/etc/.pihole"
-piholeSchemaTemplateDir="${piholeGitDir}/advanced/Templates"
+piholeGitDir="/usr/share/pihole"
+piholeSchemaTemplateDir="${piholeGitDir}/templates"
 GRAVITYDB=$(getFTLConfigValue files.gravity)
 GRAVITY_TMPDIR=$(getFTLConfigValue files.gravity_tmp)
 gravityDBschema="${piholeSchemaTemplateDir}/gravity.db.sql"
