@@ -83,13 +83,21 @@ debugFunc() {
         [[ "$value" == *"--check_database"* ]] && check_database_integrity="true"
     done
 
-  AUTOMATED=${automated:-} CHECK_DATABASE=${check_database_integrity:-} "${PI_HOLE_SCRIPT_DIR}"/piholeDebug.sh
-  exit 0
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
+    unsupportedFunc
+  else
+    AUTOMATED=${automated:-} CHECK_DATABASE=${check_database_integrity:-} "${PI_HOLE_SCRIPT_DIR}"/piholeDebug.sh
+    exit 0
+  fi
 }
 
 flushFunc() {
-  "${PI_HOLE_SCRIPT_DIR}"/piholeLogFlush.sh "$@"
-  exit 0
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
+    unsupportedFunc
+  else
+    "${PI_HOLE_SCRIPT_DIR}"/piholeLogFlush.sh "$@"
+    exit 0
+  fi
 }
 
 arpFunc() {
@@ -98,7 +106,7 @@ arpFunc() {
 }
 
 updatePiholeFunc() {
-  if [ -n "${DOCKER_VERSION}" ]; then
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
     unsupportedFunc
   else
     shift
@@ -108,7 +116,7 @@ updatePiholeFunc() {
 }
 
 repairPiholeFunc() {
-  if [ -n "${DOCKER_VERSION}" ]; then
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
     unsupportedFunc
   else
     /etc/.pihole/automated\ install/basic-install.sh --repair
@@ -133,7 +141,7 @@ chronometerFunc() {
 
 
 uninstallFunc() {
-  if [ -n "${DOCKER_VERSION}" ]; then
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
     unsupportedFunc
   else
     "${PI_HOLE_SCRIPT_DIR}"/uninstall.sh
@@ -397,7 +405,7 @@ tailFunc() {
 }
 
 piholeCheckoutFunc() {
-  if [ -n "${DOCKER_VERSION}" ]; then
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
     echo -e "${CROSS} Function not supported in Docker images"
     echo "Please build a custom image following the steps at"
     echo "https://github.com/pi-hole/docker-pi-hole?tab=readme-ov-file#building-the-image-locally"
@@ -451,12 +459,16 @@ tricorderFunc() {
 }
 
 updateCheckFunc() {
-  "${PI_HOLE_SCRIPT_DIR}"/updatecheck.sh "$@"
-  exit 0
+  if [ -n "${DOCKER_VERSION}" -o "${LINUX_DISTRO_PACKAGE}" ]; then
+    unsupportedFunc
+  else
+    "${PI_HOLE_SCRIPT_DIR}"/updatecheck.sh "$@"
+    exit 0
+  fi
 }
 
 unsupportedFunc(){
-  echo "Function not supported in Docker images"
+  echo "Function not supported in this package format"
   exit 0
 }
 
