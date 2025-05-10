@@ -21,7 +21,7 @@ partial="false"
 domain=""
 
 # Source color table
-colfile="/opt/pihole/COL_TABLE"
+colfile="${PI_HOLE_INSTALL_DIR}/COL_TABLE"
 . "${colfile}"
 
 # Source api functions

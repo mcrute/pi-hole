@@ -10,19 +10,21 @@
 # This file is copyright under the latest version of the EUPL.
 # Please see LICENSE file for your rights under this license.
 
-coltable="/opt/pihole/COL_TABLE"
+readonly PI_HOLE_SCRIPT_DIR="/opt/pihole"
+readonly PI_HOLE_DATA_DIR="/etc/pihole"
+
+coltable="${PI_HOLE_SCRIPT_DIR}/COL_TABLE"
 if [[ -f ${coltable} ]]; then
     source ${coltable}
 fi
 
-readonly PI_HOLE_SCRIPT_DIR="/opt/pihole"
 utilsfile="${PI_HOLE_SCRIPT_DIR}/utils.sh"
 source "${utilsfile}"
 
 # Determine database location
 DBFILE=$(getFTLConfigValue "files.database")
 if [ -z "$DBFILE" ]; then
-    DBFILE="/etc/pihole/pihole-FTL.db"
+    DBFILE="${PI_HOLE_DATA_DIR}/pihole-FTL.db"
 fi
 
 flushARP(){
